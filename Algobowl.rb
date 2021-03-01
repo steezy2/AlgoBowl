@@ -1,8 +1,9 @@
 def create_input(n)
   outputarr = []
-  max = 100
+  max = rand(1000)
   value = 2
   for i in 1..n do
+    max = rand(7000000)
     value = rand(value..max+value)
     line = "#{value}"
     outputarr << line
@@ -11,9 +12,9 @@ def create_input(n)
 end
 
 
-n = 8
+n = 500
 
-inputarr = create_input(8)
+inputarr = create_input(n)
 
 inputarr.each { |x| puts x }
 firstline = n.to_s+"\n"
