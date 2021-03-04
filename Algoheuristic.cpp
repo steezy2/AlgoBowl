@@ -7,22 +7,14 @@ using namespace std;
 
 void calculateAdditions(vector<int> valuesToCalculate, vector<vector<int>>& additions, vector<int> calculatedValues);
 vector<int> getInputFile(string filename);
+void writeToFile(vector<vector<int>> additions);
 
 int main() {
     vector<int> inputfilevector = getInputFile("Algoinput.txt");
-
-
-
     vector<vector<int>> additions;
     additions.clear();
-    calculateAdditions({2,9, 12}, additions, {1});
-    cout << additions.size() << endl;
-    for( vector<int> v : additions){
-        for(int i : v){
-            cout << i << "  ";
-        }
-        cout << endl;
-    }
+    calculateAdditions(inputfilevector, additions, {1});
+    writeToFile(additions);
     return 0;
 }
 
@@ -65,19 +57,28 @@ void calculateAdditions(vector<int> valuesToCalculate, vector<vector<int>>& addi
 }
 
 vector<int> getInputFile(string filename) {
-  ifstream inputfile (filename);
-  string firstline;
-  string myText;
-  vector<int> inputvec;
-  if(inputfile.is_open()){
-    //get first line
-    getline (inputfile, firstline);
-    while (getline (inputfile, myText, ' ')){
-      inputvec.push_back(stoi(myText));
+    ifstream inputfile (filename);
+    string firstline;
+    string myText;
+    vector<int> inputvec;
+    if(inputfile.is_open()){
+        //get first line
+        getline (inputfile, firstline);
+        while (getline (inputfile, myText, ' ')){
+            inputvec.push_back(stoi(myText));
+        }
     }
-  }
-  for(int i = 0; i < inputvec.size(); i++){
-    cout << inputvec[i] << endl;
-  }
-  return inputvec;
+    return inputvec;
+}
+
+void writeToFile(vector<vector<int>> additions){
+    ofstream myFile("output.txt");
+    myFile << additions.size() << endl;
+    for( vector<int> v : additions){
+        for(int i : v){
+            myFile << i << " ";
+        }
+        myFile << endl;
+    }
+    myFile.close();
 }
